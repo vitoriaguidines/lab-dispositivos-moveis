@@ -39,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: 24),
             ElevatedButton(
               onPressed: () {
-                //logica de bd pra coisar o coiso
+                //coisar o coiso
               },
               child: const Text('Login'),
             ),

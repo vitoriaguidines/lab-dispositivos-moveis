@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 import 'classes_bd/user.dart';
+import 'classes_bd/video.dart';
 
 void main() async {
   await WidgetsFlutterBinding.ensureInitialized();
@@ -15,6 +16,7 @@ void main() async {
   databaseFactory = databaseFactoryFfi;
 
   await BDProvider.bd.init_BD();
+  Video.getVideoById(1).then(((value) => print(value)));
   runApp(const MyApp());
 }
 

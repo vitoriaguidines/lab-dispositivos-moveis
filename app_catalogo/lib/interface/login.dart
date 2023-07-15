@@ -33,8 +33,7 @@ class _LoginPageState extends State<LoginPage> {
               Align(
                 alignment: FractionalOffset.topCenter,
                 child: Padding(
-                  padding: EdgeInsets.only(
-                      top: 80.0), // Adjust the top margin as desired
+                  padding: EdgeInsets.only(top: 80.0),
                   child: Image.asset(
                     "images/logouff.png",
                     width: 200,
@@ -52,6 +51,16 @@ class _LoginPageState extends State<LoginPage> {
                       color: Color(0xFF262A2B).withOpacity(0.7),
                       borderRadius: BorderRadius.circular(24),
                     ),
+                  ),
+                ),
+              ),
+              Container(
+                width: 328,
+                height: 193,
+                decoration: ShapeDecoration(
+                  color: Color(0xFF262A2B),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(24),
                   ),
                 ),
               ),

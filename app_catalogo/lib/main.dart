@@ -1,6 +1,20 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-void main() {
+import 'package:app_catalogo/db.dart';
+import 'package:flutter/material.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+
+import 'classes_bd/user.dart';
+
+void main() async {
+  await WidgetsFlutterBinding.ensureInitialized();
+  if (Platform.isWindows || Platform.isLinux) {
+    // Initialize FFI
+    sqfliteFfiInit();
+  }
+  databaseFactory = databaseFactoryFfi;
+
+  await BDProvider.bd.init_BD();
   runApp(const MyApp());
 }
 

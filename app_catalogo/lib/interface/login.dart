@@ -25,23 +25,10 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
-              controller: _emailController,
-              decoration: const InputDecoration(labelText: 'Email'),
-            ),
-            SizedBox(height: 20),
-            TextField(
-              controller: _passwordController,
-              decoration: const InputDecoration(
-                labelText: 'Password',
-              ),
-            ),
-            SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: () {
-                //coisar o coiso
-              },
-              child: const Text('Login'),
+            Container(
+              width: 428,
+              height: 932,
+              child: Image.asset("images/fundo.jpg"),
             ),
           ],
         ),

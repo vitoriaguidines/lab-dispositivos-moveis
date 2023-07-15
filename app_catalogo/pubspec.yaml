@@ -59,7 +59,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - images/logouff.jpg
+    - images/logouff.png
     - images/uff.jpg
   # To add assets to your application, add an assets section, like this:
   # assets:

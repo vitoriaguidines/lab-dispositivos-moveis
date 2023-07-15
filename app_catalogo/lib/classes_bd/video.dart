@@ -35,7 +35,7 @@ class Video {
       releaseDate: value["releaseDate"],
       genres: value["genres"]);
 
-  static getVideoById(int id) async {
+  static Future<Video> getVideoById(int id) async {
     final db = await BDProvider.bd.database;
     var resVideo = await db.query("video", where: "id = ?", whereArgs: [id]);
 

@@ -18,7 +18,7 @@ class User {
       password: value["password"],
       email: value["email"]);
 
-  static getUserById(int id) async {
+  static Future<User> getUserById(int id) async {
     final db = await BDProvider.bd.database;
     var res = await db.query("user", where: "id = ?", whereArgs: [id]);
     return User.fromMap(res.first);

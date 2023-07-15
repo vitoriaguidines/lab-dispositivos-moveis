@@ -8,7 +8,7 @@ class Genre {
   factory Genre.fromMap(Map<String, dynamic> value) =>
       Genre(id: value["id"], name: value["name"]);
 
-  static getGenreById(int id) async {
+  static Future<Genre> getGenreById(int id) async {
     final db = await BDProvider.bd.database;
     var res = await db.query("genre", where: "id = ?", whereArgs: [id]);
     return Genre.fromMap(res.first);

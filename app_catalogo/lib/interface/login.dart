@@ -41,27 +41,27 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              Expanded(
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    width: 392,
-                    height: 401,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF262A2B).withOpacity(0.7),
-                      borderRadius: BorderRadius.circular(24),
-                    ),
-                  ),
-                ),
-              ),
               Container(
-                width: 328,
-                height: 193,
-                decoration: ShapeDecoration(
-                  color: Color(0xFF262A2B),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(24),
-                  ),
+                width: 350,
+                height: 200,
+                decoration: BoxDecoration(
+                  color: Color(0XFF262A2B).withOpacity(0.7),
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 300,
+                      height: 150,
+                      decoration: ShapeDecoration(
+                        color: Color(0xFF262A2B),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],

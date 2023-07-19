@@ -1,4 +1,5 @@
 import 'package:app_catalogo/interface/cadastro.dart';
+import 'package:app_catalogo/interface/catalogo.dart';
 import 'package:app_catalogo/interface/menu.dart';
 import 'package:flutter/material.dart';
 import 'interface/login.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: CadastroPage(),
+      home: CatalogoPage(),
     );
   }
 

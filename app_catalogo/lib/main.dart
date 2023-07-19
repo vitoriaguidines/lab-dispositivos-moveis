@@ -50,9 +50,12 @@ class MyApp extends StatelessWidget {
       Icon icon, Color color, double width, double heigth, onPressed) {
     return ElevatedButton(
       onPressed: onPressed,
-      child: Icon(
-        Icons.arrow_back,
-        color: Colors.white,
+      child: Align(
+        alignment: Alignment.center,
+        child: Icon(
+          Icons.arrow_back,
+          color: Colors.white,
+        ),
       ),
       style: ButtonStyle(
         shape: MaterialStateProperty.all(

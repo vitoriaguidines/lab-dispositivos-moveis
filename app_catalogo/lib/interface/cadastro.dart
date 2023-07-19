@@ -41,7 +41,7 @@ class _CadastroPageState extends State<CadastroPage> {
               Align(
                 alignment: FractionalOffset.topCenter,
                 child: Padding(
-                  padding: EdgeInsets.only(top: 100),
+                  padding: EdgeInsets.only(top: 85),
                   child: Image.asset(
                     "images/logouff.png",
                     width: 200,
@@ -50,33 +50,55 @@ class _CadastroPageState extends State<CadastroPage> {
                 ),
               ),
               Padding(
-                  padding: EdgeInsets.only(top: 30, bottom: 30),
+                padding: EdgeInsets.only(top: 10, bottom: 10),
+                child: Container(
+                  child: TextField(
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                      fontFamily: 'Inter',
+                    ),
+                    decoration: InputDecoration(
+                      hintText: 'Email',
+                      hintStyle: TextStyle(color: Colors.grey),
+                      contentPadding: EdgeInsets.all(16),
+                      border: InputBorder.none,
+                    ),
+                  ),
+                  width: 300,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    color: Color(0xFF262A2B),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: 10),
+                child: Container(
+                  width: 300,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    color: Color(0xFF262A2B),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: 10),
+                child: Container(
+                  width: 300,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    color: Color(0xFF262A2B),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+              ),
+              Padding(
+                  padding: EdgeInsets.only(bottom: 10),
                   child: funcoes.criaBotao(
                       "Cadastrar", Color(0xFF0F62AC), 300, 80, () => {})),
-              Container(
-                width: 300,
-                height: 80,
-                decoration: BoxDecoration(
-                  color: Color(0xFF262A2B),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-              ),
-              Container(
-                width: 300,
-                height: 80,
-                decoration: BoxDecoration(
-                  color: Color(0xFF262A2B),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-              ),
-              Container(
-                width: 300,
-                height: 80,
-                decoration: BoxDecoration(
-                  color: Color(0xFF262A2B),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-              )
             ],
           ),
         ],

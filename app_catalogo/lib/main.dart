@@ -19,4 +19,29 @@ class MyApp extends StatelessWidget {
       home: LoginPage(),
     );
   }
+
+  Widget criaBotao(
+      String text, Color color, double width, double heigth, onPressed) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 24,
+          fontFamily: 'Inter',
+          color: Color.fromARGB(255, 255, 255, 255),
+        ),
+      ),
+      style: ButtonStyle(
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+        minimumSize: MaterialStateProperty.all(Size(width, heigth)),
+        fixedSize: MaterialStateProperty.all(Size(width, heigth)),
+        backgroundColor: MaterialStateProperty.all(color),
+      ),
+    );
+  }
 }

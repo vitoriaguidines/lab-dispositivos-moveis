@@ -13,6 +13,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   MyApp funcoes = MyApp();
+  bool passwordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +67,73 @@ class _LoginPageState extends State<LoginPage> {
                             borderRadius: BorderRadius.circular(24),
                           ),
                         ),
+                        child: Column(
+                          children: [
+                            SizedBox(height: 20), // Espaço vertical
+                            TextField(
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontFamily: 'Inter',
+                              ),
+                              decoration: InputDecoration(
+                                hintText: 'Email',
+                                hintStyle: TextStyle(color: Colors.grey),
+                                contentPadding: EdgeInsets.all(16),
+                                border: InputBorder.none,
+                              ),
+                            ),
+                            Divider(
+                              color: Colors.grey,
+                              height: 1,
+                              thickness: 1,
+                              indent: 16,
+                              endIndent: 16,
+                            ),
+                            SizedBox(height: 10),
+                            TextField(
+                              obscureText: passwordVisible,
+                              decoration: InputDecoration(
+                                hintText: "Password",
+                                labelText: "Password",
+                                suffixIcon: IconButton(
+                                  icon: Icon(passwordVisible
+                                      ? Icons.visibility
+                                      : Icons.visibility_off),
+                                  onPressed: () {
+                                    setState(
+                                      () {
+                                        passwordVisible = !passwordVisible;
+                                      },
+                                    );
+                                  },
+                                ),
+                                alignLabelWithHint: false,
+                                filled: true,
+                              ),
+                              keyboardType: TextInputType.visiblePassword,
+                              textInputAction: TextInputAction.done,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontFamily: 'Inter',
+                              ),
+                              // decoration: InputDecoration(
+                              //   hintText: 'Password',
+                              //   hintStyle: TextStyle(color: Colors.grey),
+                              //   contentPadding: EdgeInsets.all(16),
+                              //   border: InputBorder.none,
+                              // ),
+                            ),
+                            Divider(
+                              color: Colors.grey,
+                              height: 1,
+                              thickness: 1,
+                              indent: 16,
+                              endIndent: 16,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     Padding(
@@ -97,23 +165,30 @@ class _LoginPageState extends State<LoginPage> {
                     print("Texto 'Convidado' foi clicado!");
                   },
                   child: Container(
-                    width: 130,
+                    width: 150,
                     height: 50,
                     decoration: BoxDecoration(
                       color: Color(0xFF262A2B),
                       borderRadius: BorderRadius.circular(24),
                     ),
-                    child: Center(
-                      child: Text(
-                        'Convidado',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w600,
-                          decoration: TextDecoration.underline,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Convidado',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w600,
+                            decoration: TextDecoration.underline,
+                          ),
                         ),
-                      ),
+                        Icon(
+                          Icons.arrow_forward,
+                          color: Colors.white,
+                        ),
+                      ],
                     ),
                   ),
                 ),

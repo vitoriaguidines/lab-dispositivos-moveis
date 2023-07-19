@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
             child: Container(
-              color: Colors.black.withOpacity(0.3),
+              color: Colors.black.withOpacity(0.1),
             ),
           ),
           Column(

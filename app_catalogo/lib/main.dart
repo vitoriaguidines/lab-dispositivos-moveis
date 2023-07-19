@@ -1,3 +1,4 @@
+import 'package:app_catalogo/interface/menu.dart';
 import 'package:flutter/material.dart';
 import 'interface/login.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginPage(),
+      home: MenuPage(),
     );
   }
 
@@ -36,6 +37,27 @@ class MyApp extends StatelessWidget {
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+        minimumSize: MaterialStateProperty.all(Size(width, heigth)),
+        fixedSize: MaterialStateProperty.all(Size(width, heigth)),
+        backgroundColor: MaterialStateProperty.all(color),
+      ),
+    );
+  }
+
+  Widget botaoRedondo(
+      Icon icon, Color color, double width, double heigth, onPressed) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      child: Icon(
+        Icons.arrow_back,
+        color: Colors.white,
+      ),
+      style: ButtonStyle(
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
           ),
         ),
         minimumSize: MaterialStateProperty.all(Size(width, heigth)),

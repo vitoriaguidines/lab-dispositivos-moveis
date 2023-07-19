@@ -1,3 +1,4 @@
+import 'package:app_catalogo/interface/cadastro.dart';
 import 'package:app_catalogo/interface/menu.dart';
 import 'package:flutter/material.dart';
 import 'interface/login.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MenuPage(),
+      home: CadastroPage(),
     );
   }
 
@@ -50,12 +51,9 @@ class MyApp extends StatelessWidget {
       Icon icon, Color color, double width, double heigth, onPressed) {
     return ElevatedButton(
       onPressed: onPressed,
-      child: Align(
-        alignment: Alignment.center,
-        child: Icon(
-          Icons.arrow_back,
-          color: Colors.white,
-        ),
+      child: Icon(
+        Icons.arrow_back,
+        color: Colors.white,
       ),
       style: ButtonStyle(
         shape: MaterialStateProperty.all(

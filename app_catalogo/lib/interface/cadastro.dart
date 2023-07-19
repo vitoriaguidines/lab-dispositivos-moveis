@@ -50,16 +50,32 @@ class _CadastroPageState extends State<CadastroPage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 30, bottom: 30),
-                child: Container(
-                    width: 300,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF262A2B),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: funcoes.criaBotao(
-                        "Cadastrar", Color(0xFF0F62AC), 300, 80, () => {})),
+                  padding: EdgeInsets.only(top: 30, bottom: 30),
+                  child: funcoes.criaBotao(
+                      "Cadastrar", Color(0xFF0F62AC), 300, 80, () => {})),
+              Container(
+                width: 300,
+                height: 80,
+                decoration: BoxDecoration(
+                  color: Color(0xFF262A2B),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+              ),
+              Container(
+                width: 300,
+                height: 80,
+                decoration: BoxDecoration(
+                  color: Color(0xFF262A2B),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+              ),
+              Container(
+                width: 300,
+                height: 80,
+                decoration: BoxDecoration(
+                  color: Color(0xFF262A2B),
+                  borderRadius: BorderRadius.circular(15),
+                ),
               )
             ],
           ),

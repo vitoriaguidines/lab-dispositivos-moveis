@@ -36,50 +36,44 @@ class BDProvider {
 Future<List<Map<String, dynamic>>> getVideoMapList() async {
     Database db = this.database;
 
-    var result = await db.rawQuery('SELECT * FROM $video order by $id ASC');
+    var result = await db.rawQuery('SELECT * FROM video order by id ASC');
     return result;
   }
 
-  Future<int> _insertUser(User user) async {
+  _insertUser(User user) async {
     Database db = await this.database;
     var result = await db.insert('user', user);
-    return result;
   }
 
-  Future<int> _insertVideo(Video video) async {
+  _insertVideo(Video video) async {
     Database db = await this.database;
     var result = await db.insert('video', video);
-    return result;
   }
 
-  Future<int> _updateUser(User userUp) async {
+  _updateUser(User userUp) async {
     var db = await this.database;
-    Map<String, dynamic> userData = {
+    /* Map<String, dynamic> userData = {
       "name": userUp.name,
       "password": userUp.password,
       "email": userUp.email
-    };
+    }; */
 
     int result = await db
         .update(userUp, userData, where: "id=?", whereArgs: [userUp.id]);
-
-    return result;
   }
 
-  Future<int> _updateVideo(Video videoUp) async {
+  _updateVideo(Video videoUp) async {
     var db = await this.database;
     Map<String, dynamic> videoData = Video.fromMap(videoUp);
 
     int result = await db
         .update(videoUp, videoData, where: "id=?", whereArgs: [videoUp.id]);
 
-    return result;
   }
 
-  Future<int> _delete(String table, int idE) async {
+  _delete(String table, int idE) async {
     var db = await this.database;
-    int result = await db.rawDelete('DELETE FROM $table WHERE $id = $idE');
-    return result;
+    int result = await db.rawDelete('DELETE FROM $table WHERE id = $idE');
   }
 
   Future<int> getCount(String table) async {

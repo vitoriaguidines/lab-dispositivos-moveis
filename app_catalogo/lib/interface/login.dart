@@ -5,7 +5,7 @@ import 'package:app_catalogo/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:app_catalogo/interface/convvideos.dart';
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -167,7 +167,7 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ConvvideosPage()));
+                                builder: (context) => CatalogoPage()));
                       },
                       child: Container(
                         width: 150,

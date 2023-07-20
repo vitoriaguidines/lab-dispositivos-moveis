@@ -33,21 +33,23 @@ class BDProvider {
     });
   }
 
-Future<List<Map<String, dynamic>>> getVideoMapList() async {
-    Database db = this.database;
+  Future<List<Map<String, dynamic>>> getVideoMapList() async {
+    Database db = await this.database;
 
-    var result = await db.rawQuery('SELECT * FROM video order by id ASC');
+    var result = await db.rawQuery('SELECT * FROM $video order by $id ASC');
     return result;
   }
 
   _insertUser(User user) async {
     Database db = await this.database;
-    var result = await db.insert('user', user);
+    var result = await db.insert('user', user.toJson());
+    return result;
   }
 
   _insertVideo(Video video) async {
     Database db = await this.database;
-    var result = await db.insert('video', video);
+    var result = await db.insert('video', video.toJson());
+    return result;
   }
 
   _updateUser(User userUp) async {
@@ -64,33 +66,37 @@ Future<List<Map<String, dynamic>>> getVideoMapList() async {
 
   _updateVideo(Video videoUp) async {
     var db = await this.database;
-    Map<String, dynamic> videoData = Video.fromMap(videoUp);
+    Map<String, dynamic> videoData = videoUp.toJson();
 
     int result = await db
         .update(videoUp, videoData, where: "id=?", whereArgs: [videoUp.id]);
 
+    return result;
   }
 
   _delete(String table, int idE) async {
     var db = await this.database;
     int result = await db.rawDelete('DELETE FROM $table WHERE id = $idE');
+    return result;
   }
 
   Future<int> getCount(String table) async {
     Database db = await this.database;
     List<Map<String, dynamic>> x =
         await db.rawQuery('SELECT COUNT (*) from $table');
-    int result = Sqflite.firstIntValue(x);
-    return result;
+    int? result = Sqflite.firstIntValue(x);
+
+    if (result != null) return result;
+    return 0;
   }
 
   Future<List<Video>> getVideoList() async {
     var videoMapList = await getVideoMapList();
     int count = videoMapList.length;
 
-    List<Video> videoList = List<Video>();
+    List<Video> videoList = List<Video>.empty();
     for (int i = 0; i < count; i++) {
-      videoList.add(Video.fromMapObject(videoMapList[i]));
+      videoList.add(Video.fromMap(videoMapList[i]));
     }
 
     return videoList;

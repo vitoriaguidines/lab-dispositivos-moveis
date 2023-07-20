@@ -35,6 +35,18 @@ class Video {
       releaseDate: value["releaseDate"],
       genres: value["genres"]);
 
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "description": description,
+        "type": type,
+        "ageRestriction": ageRestriction,
+        "durationMinutes": durationMinutes,
+        "thumbnailImageId": thumbnailImageId,
+        "releaseDate": releaseDate,
+        "genres": genres
+      };
+
   static Future<Video> getVideoById(int id) async {
     final db = await BDProvider.bd.database;
     var resVideo = await db.query("video", where: "id = ?", whereArgs: [id]);

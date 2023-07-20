@@ -33,7 +33,7 @@ class BDProvider {
     });
   }
 
-  Future<List<Map<String, dynamic>>> getVideoMapList() async {
+Future<List<Map<String, dynamic>>> getVideoMapList() async {
     Database db = this.database;
 
     var result = await db.rawQuery('SELECT * FROM $video order by $id ASC');

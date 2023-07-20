@@ -33,23 +33,14 @@ class BDProvider {
     });
   }
 
-  Future<List<Map<String, dynamic>>> getVideoMapList() async {
-    Database db = await this.database;
-
-    var result = await db.rawQuery('SELECT * FROM $video order by $id ASC');
-    return result;
-  }
-
   _insertUser(User user) async {
     Database db = await this.database;
     var result = await db.insert('user', user.toJson());
-    return result;
   }
 
   _insertVideo(Video video) async {
     Database db = await this.database;
     var result = await db.insert('video', video.toJson());
-    return result;
   }
 
   _updateUser(User userUp) async {
@@ -61,23 +52,20 @@ class BDProvider {
     }; */
 
     int result = await db
-        .update(userUp, userData, where: "id=?", whereArgs: [userUp.id]);
+        .update('user', userUp.toJson(), where: "id=?", whereArgs: [userUp.id]);
   }
 
   _updateVideo(Video videoUp) async {
     var db = await this.database;
-    Map<String, dynamic> videoData = videoUp.toJson();
+    //Map<String, dynamic> videoData = videoUp.toJson();
 
-    int result = await db
-        .update(videoUp, videoData, where: "id=?", whereArgs: [videoUp.id]);
-
-    return result;
+    int result = await db.update("video", videoUp.toJson(),
+        where: "id=?", whereArgs: [videoUp.id]);
   }
 
   _delete(String table, int idE) async {
     var db = await this.database;
     int result = await db.rawDelete('DELETE FROM $table WHERE id = $idE');
-    return result;
   }
 
   Future<int> getCount(String table) async {
@@ -90,6 +78,20 @@ class BDProvider {
     return 0;
   }
 
+  Future<List<Map<String, dynamic>>> getVideoMapList() async {
+    Database db = await this.database;
+
+    var result = await db.rawQuery('SELECT * FROM video order by id ASC');
+    return result;
+  }
+
+  Future<List<Map<String, dynamic>>> getGenreMapList() async {
+    Database db = await this.database;
+
+    var result = await db.rawQuery('SELECT * FROM genre order by id ASC');
+    return result;
+  }
+
   Future<List<Video>> getVideoList() async {
     var videoMapList = await getVideoMapList();
     int count = videoMapList.length;
@@ -100,5 +102,17 @@ class BDProvider {
     }
 
     return videoList;
+  }
+
+  Future<List<Genre>> getGenreList() async {
+    var genreMapList = await getGenreMapList();
+    int count = genreMapList.length;
+
+    List<Genre> genreList = List<Genre>.empty();
+    for (int i = 0; i < count; i++) {
+      genreList.add(Genre.fromMap(genreMapList[i]));
+    }
+
+    return genreList;
   }
 }

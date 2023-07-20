@@ -1,11 +1,30 @@
+import 'dart:io';
+
+import 'package:app_catalogo/db.dart';
+import 'package:flutter/material.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+
 import 'package:app_catalogo/interface/cadastro.dart';
 import 'package:app_catalogo/interface/catalogo.dart';
 import 'package:app_catalogo/interface/menu.dart';
 import 'package:flutter/material.dart';
 import 'interface/login.dart';
 
-void main() {
+import 'classes_bd/user.dart';
+import 'classes_bd/video.dart';
+
+void main() async {
   runApp(const MyApp());
+  //await WidgetsFlutterBinding.ensureInitialized();
+  //if (Platform.isWindows || Platform.isLinux) {
+  // Initialize FFI
+  //sqfliteFfiInit();
+  //}
+  //databaseFactory = databaseFactoryFfi;
+
+  //await BDProvider.bd.init_BD();
+  //Video.getVideoById(1).then(((value) => print(value)));
+  //runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -19,7 +38,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: CatalogoPage(),
+      home: LoginPage(),
     );
   }
 

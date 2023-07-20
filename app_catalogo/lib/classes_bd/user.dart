@@ -18,6 +18,13 @@ class User {
       password: value["password"],
       email: value["email"]);
 
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "password": password,
+        "email": email,
+      };
+
   static Future<User> getUserById(int id) async {
     final db = await BDProvider.bd.database;
     var res = await db.query("user", where: "id = ?", whereArgs: [id]);

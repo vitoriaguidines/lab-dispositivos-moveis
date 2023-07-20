@@ -11,29 +11,31 @@ class Video {
   final int durationMinutes;
   final String thumbnailImageId;
   final String releaseDate;
-  final List<Genre> genres;
+  //final List<Genre> genres;
 
-  Video(
-      {required this.id,
-      required this.name,
-      required this.description,
-      required this.type,
-      required this.ageRestriction,
-      required this.durationMinutes,
-      required this.thumbnailImageId,
-      required this.releaseDate,
-      required this.genres});
+  Video({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.type,
+    required this.ageRestriction,
+    required this.durationMinutes,
+    required this.thumbnailImageId,
+    required this.releaseDate,
+    //required this.genres
+  });
 
   factory Video.fromMap(Map<String, dynamic> value) => Video(
-      id: value["id"],
-      name: value["name"],
-      description: value["description"],
-      type: value["type"] == 1 ? true : false,
-      ageRestriction: value["ageRestriction"],
-      durationMinutes: value["durationMinutes"],
-      thumbnailImageId: value["thumbnailImageId"],
-      releaseDate: value["releaseDate"],
-      genres: value["genres"]);
+        id: value["id"],
+        name: value["name"],
+        description: value["description"],
+        type: value["type"] == 1 ? true : false,
+        ageRestriction: value["ageRestriction"],
+        durationMinutes: value["durationMinutes"],
+        thumbnailImageId: value["thumbnailImageId"],
+        releaseDate: value["releaseDate"],
+        //genres: value["genres"]
+      );
 
   static Future<Video> getVideoById(int id) async {
     final db = await BDProvider.bd.database;

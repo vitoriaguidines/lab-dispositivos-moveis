@@ -96,11 +96,11 @@ class BDProvider {
     var videoMapList = await getVideoMapList();
     int count = videoMapList.length;
 
-    List<Video> videoList = List<Video>.empty();
+    List<Video> videoList = List<Video>.empty(growable: true);
     for (int i = 0; i < count; i++) {
-      videoList.add(Video.fromMap(videoMapList[i]));
+      print(videoMapList[i]["id"]);
+      videoList.add(await Video.getVideoById(videoMapList[i]["id"]));
     }
-
     return videoList;
   }
 }

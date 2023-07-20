@@ -14,17 +14,17 @@ import 'classes_bd/user.dart';
 import 'classes_bd/video.dart';
 
 void main() async {
-  runApp(const MyApp());
-  //await WidgetsFlutterBinding.ensureInitialized();
-  //if (Platform.isWindows || Platform.isLinux) {
-  // Initialize FFI
-  //sqfliteFfiInit();
-  //}
-  //databaseFactory = databaseFactoryFfi;
-
-  //await BDProvider.bd.init_BD();
-  //Video.getVideoById(1).then(((value) => print(value)));
   //runApp(const MyApp());
+  await WidgetsFlutterBinding.ensureInitialized();
+  if (Platform.isWindows || Platform.isLinux) {
+    //Initialize FFI
+    sqfliteFfiInit();
+  }
+  databaseFactory = databaseFactoryFfi;
+
+  await BDProvider.bd.init_BD();
+  Video.getVideoById(1).then(((value) => print(value)));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

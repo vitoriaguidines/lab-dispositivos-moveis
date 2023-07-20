@@ -1,4 +1,7 @@
 import 'dart:ui';
+import 'package:app_catalogo/db.dart';
+
+import '../classes_bd/video.dart';
 import 'login.dart';
 import 'package:app_catalogo/main.dart';
 import 'package:flutter/material.dart';
@@ -14,11 +17,36 @@ class CatalogoPage extends StatefulWidget {
 
 class _CatalogoPageState extends State<CatalogoPage> {
   bool showButton = false;
-  List<Widget> containers = []; //provavelmente os videos sao adicionados aqui
+  List<Widget> containers = [];
+  List<Video> videos = []; //provavelmente os videos sao adicionados aqui
   MyApp funcoes = MyApp();
 
   @override
   Widget build(BuildContext context) {
+    //Primeiro a gente pega todos os videos no bd
+    BDProvider.bd.getVideoList().then((value) => videos = value);
+    for (Video vid in videos) {
+      containers.add(Container(
+        width: 392,
+        height: 129,
+        decoration: ShapeDecoration(
+          color: Color(0xFF262A2B),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+        ),
+        child: Center(
+          child: Text(
+            vid.name,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ));
+    }
     return Scaffold(
       body: Stack(
         children: [

@@ -1,58 +1,23 @@
 import 'dart:ui';
 import 'package:app_catalogo/interface/menu.dart';
 
+import 'login.dart';
+import 'package:app_catalogo/main.dart';
 import 'package:flutter/material.dart';
-
-// Tab1 and Tab2 classes (unchanged from previous code)
-class Tab1 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Filmes'),
-    );
-  }
-}
-
-class Tab2 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Séries'),
-    );
-  }
-}
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:app_catalogo/interface/login.dart';
+import 'package:app_catalogo/db.dart';
 
-class CatalogoPage extends StatefulWidget {
-  const CatalogoPage({Key? key}) : super(key: key);
+class CadastroPage extends StatefulWidget {
+  const CadastroPage({Key? key}) : super(key: key);
 
   @override
-  State<CatalogoPage> createState() => _CatalogoPageState();
+  State<CadastroPage> createState() => _CadastroPageState();
 }
 
-class _CatalogoPageState extends State<CatalogoPage>
-    with SingleTickerProviderStateMixin {
-  bool showButton = false;
-  List<Widget> containers = []; //provavelmente os videos sao adicionados aqui
-  //MyApp funcoes = MyApp(); // Assuming this function is defined somewhere else
-
-  late TabController tabController;
-
-  // Dropdown data
-  List<String> dropdownItems = ['Item 1', 'Item 2', 'Item 3'];
-  String selectedDropdownItem = 'Item 1'; // Initially selected item
-
-  @override
-  void initState() {
-    super.initState();
-    tabController = TabController(length: 2, vsync: this);
-  }
-
-  @override
-  void dispose() {
-    tabController.dispose();
-    super.dispose();
-  }
+class _CadastroPageState extends State<CadastroPage> {
+  MyApp funcoes = MyApp();
 
   @override
   Widget build(BuildContext context) {
@@ -195,10 +160,4 @@ class _CatalogoPageState extends State<CatalogoPage>
       ),
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: CatalogoPage(),
-  ));
 }

@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:app_catalogo/interface/cadastro.dart';
 import 'package:app_catalogo/interface/catalogo.dart';
 import 'package:app_catalogo/interface/menu.dart';
 import 'package:app_catalogo/main.dart';
@@ -143,7 +144,10 @@ class _LoginPageState extends State<LoginPage> {
                                 Color(0xFF0F62AC), 300, 80, () => {})),
                         GestureDetector(
                           onTap: () {
-                            print("teste");
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CadastroPage()));
                           },
                           child: Text(
                             'Fazer cadastro',

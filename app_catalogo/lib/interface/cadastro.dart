@@ -1,4 +1,6 @@
 import 'dart:ui';
+import 'package:app_catalogo/interface/menu.dart';
+
 import 'package:flutter/material.dart';
 
 // Tab1 and Tab2 classes (unchanged from previous code)
@@ -19,6 +21,7 @@ class Tab2 extends StatelessWidget {
     );
   }
 }
+import 'package:app_catalogo/interface/login.dart';
 
 class CatalogoPage extends StatefulWidget {
   const CatalogoPage({Key? key}) : super(key: key);
@@ -53,122 +56,142 @@ class _CatalogoPageState extends State<CatalogoPage>
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        body: Stack(
-          children: [
-            Container(
-              width: double.infinity,
-              height: double.infinity,
-              child: Image.asset("images/uff.jpg", fit: BoxFit.cover),
+    return Scaffold(
+      body: Stack(
+        children: [
+          Container(
+            width: double.infinity,
+            height: double.infinity,
+            child: Image.asset("images/uff.jpg", fit: BoxFit.cover),
+          ),
+          BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
+            child: Container(
+              color: Colors.black.withOpacity(0.6),
             ),
-            BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
-              child: Container(
-                color: Colors.black.withOpacity(0.6),
-              ),
-            ),
-            Container(
-              width: 200,
-              height: 70,
-              color: Color(0xFF262A2B),
-              alignment: Alignment.center,
-              child: DropdownButton<String>(
-                value: selectedDropdownItem,
-                items: dropdownItems.map((String item) {
-                  return DropdownMenuItem<String>(
-                    value: item,
-                    child: Text(item, style: TextStyle(color: Colors.white)),
-                  );
-                }).toList(),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    selectedDropdownItem = newValue!;
-                  });
-                },
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 15, left: 220),
-              child: /*funcoes.botaoRedondo(
-                  Icon(Icons.arrow_back), Color(0xFF0F62AC), 40, 40, () => {}),*/
-                  ElevatedButton(
-                onPressed: () {
-                  // Add your logic here for the button's action
-                },
-                style: ElevatedButton.styleFrom(
-                  primary: Color(0xFF0F62AC),
-                  shape: CircleBorder(),
-                ),
-                child: Icon(Icons.arrow_back),
-              ),
-            ),
-            SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.only(top: 65, left: 20, right: 20),
-                child: Container(
-                  height: MediaQuery.of(context).size.height,
-                  child: Column(
+          ),
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 35, right: 335),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          color: Color(0xFF0F62AC),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.all(5),
-                              child: TabBar(
-                                unselectedLabelColor: Colors.white,
-                                labelColor: Colors.black,
-                                indicatorColor: Colors.white,
-                                indicatorWeight: 2,
-                                indicator: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                controller: tabController,
-                                tabs: [
-                                  Tab(
-                                    text: 'Filmes',
-                                  ),
-                                  Tab(
-                                    text: 'Séries',
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginPage()));
+                        },
+                        child: Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                      Expanded(
-                        child: TabBarView(
-                          controller: tabController,
-                          children: [
-                            Tab1(),
-                            Tab2(),
-                          ],
-                        ),
-                      )
                     ],
                   ),
                 ),
-              ),
+                Align(
+                  alignment: FractionalOffset.topCenter,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 25),
+                    child: Image.asset(
+                      "images/logouff.png",
+                      width: 200,
+                      height: 200,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 10, bottom: 10),
+                  child: Container(
+                    child: TextField(
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontFamily: 'Inter',
+                      ),
+                      decoration: InputDecoration(
+                        hintText: 'Nome',
+                        hintStyle: TextStyle(color: Colors.grey),
+                        contentPadding: EdgeInsets.all(16),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                    width: 300,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      color: Color(0xFF262A2B),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10),
+                  child: Container(
+                    child: TextField(
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontFamily: 'Inter',
+                      ),
+                      decoration: InputDecoration(
+                        hintText: 'Email',
+                        hintStyle: TextStyle(color: Colors.grey),
+                        contentPadding: EdgeInsets.all(16),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                    width: 300,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      color: Color(0xFF262A2B),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10),
+                  child: Container(
+                    child: TextField(
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontFamily: 'Inter',
+                      ),
+                      decoration: InputDecoration(
+                        hintText: 'Senha',
+                        hintStyle: TextStyle(color: Colors.grey),
+                        contentPadding: EdgeInsets.all(16),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                    width: 300,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      color: Color(0xFF262A2B),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                ),
+                Padding(
+                    padding: EdgeInsets.only(bottom: 10),
+                    child: funcoes.criaBotao(
+                        "Cadastrar", Color(0xFF0F62AC), 300, 80, () => {})),
+              ],
             ),
-          ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            setState(() {
-              showButton = !showButton;
-            });
-          },
-          backgroundColor: Color(0xFF0F62AC),
-          child: Icon(Icons.add),
-        ),
+          )
+        ],
       ),
     );
   }

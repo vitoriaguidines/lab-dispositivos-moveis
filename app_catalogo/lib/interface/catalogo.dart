@@ -78,8 +78,8 @@ class _CatalogoPageState extends State<CatalogoPage>
                                 return DropdownMenuItem<String>(
                                   value: item,
                                   child: Text(item,
-                                      style: TextStyle(color: Colors.white)),
-                                );
+                                      style: TextStyle(color: Color(0xFF262A2B)),
+                                ));
                               }).toList(),
                               onChanged: (String? newValue) {
                                 setState(() {

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:app_catalogo/db.dart';
+import 'package:app_catalogo/interface/convvideos.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginPage(),
+      home: CatalogoPage(),
     );
   }
 

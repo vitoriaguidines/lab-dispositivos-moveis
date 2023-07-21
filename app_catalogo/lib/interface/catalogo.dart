@@ -18,35 +18,13 @@ class CatalogoPage extends StatefulWidget {
 class _CatalogoPageState extends State<CatalogoPage> {
   bool showButton = false;
   List<Widget> containers = [];
-  List<Video> videos = []; //provavelmente os videos sao adicionados aqui
+  Future<List<Video>> videos = BDProvider.bd
+      .getVideoList(); //provavelmente os videos sao adicionados aqui
   MyApp funcoes = MyApp();
 
   @override
   Widget build(BuildContext context) {
     //Primeiro a gente pega todos os videos no bd
-    BDProvider.bd.getVideoList().then((value) => videos = value);
-    for (Video vid in videos) {
-      containers.add(Container(
-        width: 392,
-        height: 129,
-        decoration: ShapeDecoration(
-          color: Color(0xFF262A2B),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(24),
-          ),
-        ),
-        child: Center(
-          child: Text(
-            vid.name,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ));
-    }
     return Scaffold(
       body: Stack(
         children: [
@@ -66,15 +44,42 @@ class _CatalogoPageState extends State<CatalogoPage> {
             child: funcoes.botaoRedondo(
                 Icon(Icons.arrow_back), Color(0xFF0F62AC), 40, 40, () => {}),
           ),
-          ListView.builder(
-            itemCount: containers.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: containers[index],
-              );
-            },
-          ),
+          FutureBuilder(
+              future: videos,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                } else {
+                  return ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          width: 392,
+                          height: 129,
+                          decoration: ShapeDecoration(
+                            color: Color(0xFF262A2B),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              snapshot.data![index].name,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                }
+              }),
           SizedBox(height: 20),
           showButton
               ? Positioned(

@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:app_catalogo/db.dart';
 
+import '../classes_bd/genre.dart';
 import '../classes_bd/video.dart';
 import 'login.dart';
 import 'package:app_catalogo/main.dart';
@@ -22,8 +23,8 @@ class _CatalogoPageState extends State<CatalogoPage>
   Future<List<Video>> videos = BDProvider.bd
       .getVideoList(); //provavelmente os videos sao adicionados aqui
   MyApp funcoes = MyApp();
-  List<String> dropdownItems = ['Terror', 'Comédia', 'Ação', 'Romance'];
-  String selectedDropdownItem = 'Terror';
+  List<String> dropdownItems = ['Terror', 'Comédia', 'Ação', 'Romance', ''];
+  String selectedDropdownItem = "";
 
   late TabController tabController;
 
@@ -201,8 +202,12 @@ class _CatalogoPageState extends State<CatalogoPage>
                         child: TabBarView(
                           controller: tabController,
                           children: [
-                            Tab1(),
-                            Tab2(),
+                            Tab1(
+                              selectedDropdownItem: selectedDropdownItem,
+                            ),
+                            Tab2(
+                              selectedDropdownItem: selectedDropdownItem,
+                            ),
                           ],
                         ),
                       )
@@ -228,20 +233,21 @@ class _CatalogoPageState extends State<CatalogoPage>
 }
 
 class Tab1 extends StatelessWidget {
+  String selectedDropdownItem;
+  Tab1({this.selectedDropdownItem = ""});
   MyApp funcoes = MyApp();
   @override
   Widget build(BuildContext context) {
     return Center(
         child: FutureBuilder(
-            future: BDProvider.bd.getVideoList(),
+            future: BDProvider.bd.getVideoList(selectedDropdownItem),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const CircularProgressIndicator();
               } else {
-                //Filtra se é série ou filme
-                snapshot.data?.removeWhere((element) => element.type == false);
+                snapshot.data?.removeWhere((element) => element.type != false);
                 return ListView.builder(
-                  itemCount: snapshot.data!.length,
+                  itemCount: snapshot.data == null ? 0 : snapshot.data!.length,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -274,17 +280,21 @@ class Tab1 extends StatelessWidget {
 }
 
 class Tab2 extends StatelessWidget {
+  String selectedDropdownItem;
+  Tab2({this.selectedDropdownItem = ""});
   @override
   Widget build(BuildContext context) {
     return Center(
         child: FutureBuilder(
-            future: BDProvider.bd.getVideoList(),
+            future: BDProvider.bd.getVideoList(selectedDropdownItem),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const CircularProgressIndicator();
               } else {
                 //Filtra se é série ou filme
-                snapshot.data?.removeWhere((element) => element.type == true);
+                //Caso haja um filtro de genreo, remover filmes que não pertecem
+                //a ele
+                snapshot.data?.removeWhere((element) => element.type != true);
                 return ListView.builder(
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {

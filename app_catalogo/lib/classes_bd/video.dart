@@ -57,10 +57,17 @@ class Video {
         await db.query("video_genre", where: "videoid = ?", whereArgs: [id]);
     List<Genre> genreList = List.empty(growable: true);
     for (var item in resGenre) {
-      Genre.getGenreById(item["genreid"] as int)
-          .then((value) => genreList.add(value));
+      genreList.add(await Genre.getGenreById(item["genreid"] as int));
     }
     ret["genres"] = genreList;
     return Video.fromMap(ret);
+  }
+
+  List<String> getGenreNames() {
+    List<String> names = List.empty(growable: true);
+    for (Genre g in genres) {
+      names.add(g.name);
+    }
+    return names;
   }
 }

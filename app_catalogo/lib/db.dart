@@ -91,14 +91,17 @@ class BDProvider {
     return result;
   }
 
-  Future<List<Video>> getVideoList() async {
+  Future<List<Video>> getVideoList([String filtro = ""]) async {
     var videoMapList = await getVideoMapList();
     int count = videoMapList.length;
 
     List<Video> videoList = List<Video>.empty(growable: true);
     for (int i = 0; i < count; i++) {
       print(videoMapList[i]["id"]);
-      videoList.add(await Video.getVideoById(videoMapList[i]["id"]));
+      Video vid = await Video.getVideoById(videoMapList[i]["id"]);
+      if (filtro == "")
+        videoList.add(vid);
+      else if (vid.getGenreNames().contains(filtro)) videoList.add(vid);
     }
     return videoList;
   }

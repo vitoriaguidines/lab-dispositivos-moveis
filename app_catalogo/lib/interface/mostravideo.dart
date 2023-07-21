@@ -1,4 +1,7 @@
 import 'dart:ui';
+import 'package:app_catalogo/interface/editavideo.dart';
+import 'package:path/path.dart';
+
 import '../classes_bd/video.dart';
 import 'login.dart';
 import 'package:app_catalogo/main.dart';
@@ -50,31 +53,38 @@ class _MostraVideoPageState extends State<MostraVideoPage> {
             top: 15,
             right: 30,
             child: Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                color: Color(0xFF262A2B),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.edit,
-                    color: Colors.white,
-                    size: 20,
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Color(0xFF262A2B),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: GestureDetector(
+                  onTap: () => {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => EditavideoPage(video: video)))
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.edit,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                      Text(
+                        "Editar",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
-                  Text(
-                    "Editar",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+                )),
           ),
           Padding(
             padding: EdgeInsets.only(top: 20, bottom: 10),

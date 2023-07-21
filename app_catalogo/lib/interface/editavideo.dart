@@ -1,4 +1,5 @@
 import 'dart:ui';
+import '../classes_bd/video.dart';
 import 'login.dart';
 import 'package:app_catalogo/main.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
 class EditavideoPage extends StatefulWidget {
-  const EditavideoPage({Key? key}) : super(key: key);
+  final Video video;
+  const EditavideoPage({required this.video});
 
   @override
   State<EditavideoPage> createState() => _EditavideoPageState();
@@ -58,7 +60,7 @@ class _EditavideoPageState extends State<EditavideoPage> {
               Color(0xFF0F62AC),
               40,
               40,
-              () => {},
+              () => {Navigator.pop(context)},
             ),
           ),
           Positioned(

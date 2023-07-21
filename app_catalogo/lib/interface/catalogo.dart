@@ -257,7 +257,7 @@ class Tab1 extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => MostraVideoPage(
-                                      video: snapshot.data![index]))),
+                                      video: snapshot.data![index - index]))),
                           child: Container(
                             width: 392,
                             height: 129,

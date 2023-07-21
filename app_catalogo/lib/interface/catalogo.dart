@@ -41,7 +41,6 @@ class _CatalogoPageState extends State<CatalogoPage>
 
   @override
   Widget build(BuildContext context) {
-
     //Primeiro a gente pega todos os videos no bd
     /*return Scaffold(
       body: Stack(
@@ -229,11 +228,48 @@ class _CatalogoPageState extends State<CatalogoPage>
 }
 
 class Tab1 extends StatelessWidget {
+  MyApp funcoes = MyApp();
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Filmes'),
-    );
+        child: FutureBuilder(
+            future: BDProvider.bd.getVideoList(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              } else {
+                //Filtra se é série ou filme
+                snapshot.data?.removeWhere((element) => element.type == false);
+                return ListView.builder(
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        width: 392,
+                        height: 129,
+                        decoration: ShapeDecoration(
+                          color: Color(0xFF262A2B),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(24),
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            snapshot.data![index].name,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }
+            }));
   }
 }
 
@@ -241,7 +277,43 @@ class Tab2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Séries'),
-    );
+        child: FutureBuilder(
+            future: BDProvider.bd.getVideoList(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              } else {
+                //Filtra se é série ou filme
+                snapshot.data?.removeWhere((element) => element.type == true);
+                return ListView.builder(
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        width: 392,
+                        height: 129,
+                        decoration: ShapeDecoration(
+                          color: Color(0xFF262A2B),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(24),
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            snapshot.data![index].name,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }
+            }));
   }
 }

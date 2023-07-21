@@ -288,6 +288,7 @@ class Tab1 extends StatelessWidget {
 class Tab2 extends StatelessWidget {
   String selectedDropdownItem;
   Tab2({this.selectedDropdownItem = ""});
+  MyApp funcoes = MyApp();
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -297,35 +298,38 @@ class Tab2 extends StatelessWidget {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const CircularProgressIndicator();
               } else {
-                //Filtra se é série ou filme
-                //Caso haja um filtro de genreo, remover filmes que não pertecem
-                //a ele
                 snapshot.data?.removeWhere((element) => element.type != true);
                 return ListView.builder(
-                  itemCount: snapshot.data!.length,
+                  itemCount: snapshot.data == null ? 0 : snapshot.data!.length,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        width: 392,
-                        height: 129,
-                        decoration: ShapeDecoration(
-                          color: Color(0xFF262A2B),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                        ),
-                        child: Center(
-                          child: Text(
-                            snapshot.data![index].name,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
+                      child: GestureDetector(
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MostraVideoPage(
+                                      video: snapshot.data![index - index]))),
+                          child: Container(
+                            width: 392,
+                            height: 129,
+                            decoration: ShapeDecoration(
+                              color: Color(0xFF262A2B),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(24),
+                              ),
                             ),
-                          ),
-                        ),
-                      ),
+                            child: Center(
+                              child: Text(
+                                snapshot.data![index].name,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          )),
                     );
                   },
                 );

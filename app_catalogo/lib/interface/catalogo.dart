@@ -34,7 +34,7 @@ class _CatalogoPageState extends State<CatalogoPage>
     super.dispose();
   }
 
-@override
+  @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
@@ -62,11 +62,11 @@ class _CatalogoPageState extends State<CatalogoPage>
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                        Padding(
-                          padding: EdgeInsets.only(top: 15, left: 15),
-                          child: funcoes.botaoRedondo(
-                              Icon(Icons.arrow_back), Color(0xFF0F62AC), 40, 40, () => {}),
-                        ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 15, left: 15),
+                            child: funcoes.botaoRedondo(Icon(Icons.arrow_back),
+                                Color(0xFF0F62AC), 40, 40, () => {}),
+                          ),
                           Container(
                             width: 200,
                             height: 70,
@@ -76,10 +76,12 @@ class _CatalogoPageState extends State<CatalogoPage>
                               value: selectedDropdownItem,
                               items: dropdownItems.map((String item) {
                                 return DropdownMenuItem<String>(
-                                  value: item,
-                                  child: Text(item,
-                                      style: TextStyle(color: Color(0xFF262A2B)),
-                                ));
+                                    value: item,
+                                    child: Text(
+                                      item,
+                                      style:
+                                          TextStyle(color: Color(0xFF262A2B)),
+                                    ));
                               }).toList(),
                               onChanged: (String? newValue) {
                                 setState(() {
@@ -150,7 +152,6 @@ class _CatalogoPageState extends State<CatalogoPage>
         ),
       ),
     );
-    
   }
 }
 

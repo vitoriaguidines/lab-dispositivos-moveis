@@ -3,7 +3,7 @@ import 'package:app_catalogo/db.dart';
 import 'genre.dart';
 
 class Video {
-  final int id;
+  int? id;
   final String name;
   final String description;
   final bool type;
@@ -14,7 +14,7 @@ class Video {
   final List<Genre> genres;
 
   Video(
-      {required this.id,
+      {this.id,
       required this.name,
       required this.description,
       required this.type,

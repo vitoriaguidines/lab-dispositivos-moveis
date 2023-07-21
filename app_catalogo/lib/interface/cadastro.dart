@@ -1,13 +1,10 @@
 import 'dart:ui';
 import 'package:app_catalogo/interface/menu.dart';
-
-import 'login.dart';
-import 'package:app_catalogo/main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:app_catalogo/interface/login.dart';
 import 'package:app_catalogo/db.dart';
+import 'package:app_catalogo/classes_bd/user.dart';
+import 'package:app_catalogo/main.dart';
 
 class CadastroPage extends StatefulWidget {
   const CadastroPage({Key? key}) : super(key: key);
@@ -18,6 +15,10 @@ class CadastroPage extends StatefulWidget {
 
 class _CadastroPageState extends State<CadastroPage> {
   MyApp funcoes = MyApp();
+
+  final TextEditingController _nomeController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _senhaController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -81,6 +82,7 @@ class _CadastroPageState extends State<CadastroPage> {
                   padding: EdgeInsets.only(top: 10, bottom: 10),
                   child: Container(
                     child: TextField(
+                      controller: _nomeController,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 30,
@@ -105,6 +107,7 @@ class _CadastroPageState extends State<CadastroPage> {
                   padding: EdgeInsets.only(bottom: 10),
                   child: Container(
                     child: TextField(
+                      controller: _emailController,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 30,
@@ -129,6 +132,7 @@ class _CadastroPageState extends State<CadastroPage> {
                   padding: EdgeInsets.only(bottom: 10),
                   child: Container(
                     child: TextField(
+                      controller: _senhaController,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 30,
@@ -150,12 +154,38 @@ class _CadastroPageState extends State<CadastroPage> {
                   ),
                 ),
                 Padding(
-                    padding: EdgeInsets.only(bottom: 10),
-                    child: funcoes.criaBotao(
-                        "Cadastrar", Color(0xFF0F62AC), 300, 80, () => {})),
+                  padding: EdgeInsets.only(bottom: 10),
+                  child: funcoes.criaBotao(
+                    "Cadastrar",
+                    Color(0xFF0F62AC),
+                    300,
+                    80,
+                    () {
+                      String nome = _nomeController.text;
+                      String email = _emailController.text;
+                      String senha = _senhaController.text;
+
+                      User newUser =
+                          User(name: nome, email: email, password: senha);
+
+                      // Verifica se o usuário já existe no banco de dados (pode ajustar conforme suas necessidades)
+                      User.getUserById(newUser.id ?? 0).then((user) {
+                        if (user == null) {
+                          // Se o usuário não existe, você pode inserir os dados no banco de dados
+                          // Usando o método save() da classe User
+                          newUser.save().then((_) {
+                            print('Usuário cadastrado com sucesso!');
+                          });
+                        } else {
+                          print('Usuário já existe!');
+                        }
+                      });
+                    },
+                  ),
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

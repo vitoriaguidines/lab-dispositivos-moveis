@@ -1,20 +1,25 @@
 import 'dart:ui';
+import '../classes_bd/video.dart';
 import 'login.dart';
 import 'package:app_catalogo/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-class CadastrovideoPage extends StatefulWidget {
-  const CadastrovideoPage({Key? key}) : super(key: key);
+class MostraVideoPage extends StatefulWidget {
+  final Video video;
+  const MostraVideoPage({required Video this.video});
 
   @override
-  State<CadastrovideoPage> createState() => _CadastrovideoPageState();
+  State<MostraVideoPage> createState() =>
+      _MostraVideoPageState(video: this.video);
 }
 
-class _CadastrovideoPageState extends State<CadastrovideoPage> {
+class _MostraVideoPageState extends State<MostraVideoPage> {
   MyApp funcoes = MyApp();
 
+  final Video video;
+  _MostraVideoPageState({required Video this.video});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,7 +106,7 @@ class _CadastrovideoPageState extends State<CadastrovideoPage> {
                     // ),
                     // Divider(color: Colors.white),
                     Text(
-                      "Nome",
+                      video.name,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -110,7 +115,7 @@ class _CadastrovideoPageState extends State<CadastrovideoPage> {
                     ),
                     Divider(color: Colors.white),
                     Text(
-                      "Gênero",
+                      video.genres[0].name,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -119,7 +124,7 @@ class _CadastrovideoPageState extends State<CadastrovideoPage> {
                     ),
                     Divider(color: Colors.white),
                     Text(
-                      "Tipo",
+                      video.type ? "Série" : "Filme",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -128,7 +133,7 @@ class _CadastrovideoPageState extends State<CadastrovideoPage> {
                     ),
                     Divider(color: Colors.white),
                     Text(
-                      "Duração",
+                      video.durationMinutes.toString(),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -137,7 +142,7 @@ class _CadastrovideoPageState extends State<CadastrovideoPage> {
                     ),
                     Divider(color: Colors.white),
                     Text(
-                      "Classificação",
+                      video.ageRestriction,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -146,7 +151,7 @@ class _CadastrovideoPageState extends State<CadastrovideoPage> {
                     ),
                     Divider(color: Colors.white),
                     Text(
-                      "Data de lançamento",
+                      video.releaseDate,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,

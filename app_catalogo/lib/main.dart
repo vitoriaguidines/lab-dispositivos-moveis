@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:app_catalogo/db.dart';
-import 'package:app_catalogo/interface/cadastrovideo.dart';
+import 'package:app_catalogo/interface/mostravideo.dart';
 import 'package:app_catalogo/interface/editavideo.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

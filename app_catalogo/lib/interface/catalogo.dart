@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:app_catalogo/db.dart';
+import 'package:app_catalogo/interface/mostravideo.dart';
 
 import '../classes_bd/genre.dart';
 import '../classes_bd/video.dart';
@@ -251,26 +252,32 @@ class Tab1 extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        width: 392,
-                        height: 129,
-                        decoration: ShapeDecoration(
-                          color: Color(0xFF262A2B),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                        ),
-                        child: Center(
-                          child: Text(
-                            snapshot.data![index].name,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
+                      child: GestureDetector(
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MostraVideoPage(
+                                      video: snapshot.data![index]))),
+                          child: Container(
+                            width: 392,
+                            height: 129,
+                            decoration: ShapeDecoration(
+                              color: Color(0xFF262A2B),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(24),
+                              ),
                             ),
-                          ),
-                        ),
-                      ),
+                            child: Center(
+                              child: Text(
+                                snapshot.data![index].name,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          )),
                     );
                   },
                 );

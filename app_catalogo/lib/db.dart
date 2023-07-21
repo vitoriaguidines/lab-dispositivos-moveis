@@ -24,8 +24,7 @@ class BDProvider {
   }
 
   init_BD() async {
-    Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, "app_db.db");
+    String path = join(await getDatabasesPath(), "app_db.db");
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database bd, int version) async {
       String script = await rootBundle.loadString("assets/start_script.sql");
@@ -104,7 +103,6 @@ class BDProvider {
     return videoList;
   }
 
-
   static Future<Video> getVideoById(int id) async {
     final db = await bd.database;
     var resVideo = await db.query("video", where: "id = ?", whereArgs: [id]);
@@ -120,6 +118,7 @@ class BDProvider {
     }
     ret["genres"] = genreList;
     return Video.fromMap(ret);
+  }
 
   Future<List<Genre>> getGenreList() async {
     var genreMapList = await getGenreMapList();

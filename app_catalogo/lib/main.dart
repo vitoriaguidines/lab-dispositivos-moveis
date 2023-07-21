@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:app_catalogo/db.dart';
 import 'package:app_catalogo/interface/cadastrovideo.dart';
 import 'package:app_catalogo/interface/editavideo.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 
 import 'package:app_catalogo/interface/cadastro.dart';
 import 'package:app_catalogo/interface/catalogo.dart';
@@ -18,11 +20,17 @@ import 'classes_bd/video.dart';
 void main() async {
   //runApp(const MyApp());
   await WidgetsFlutterBinding.ensureInitialized();
-  if (Platform.isWindows || Platform.isLinux) {
-    //Initialize FFI
-    sqfliteFfiInit();
+  try {
+    if (Platform.isWindows || Platform.isLinux) {
+      //Initialize FFI
+      sqfliteFfiInit();
+      databaseFactory = databaseFactoryFfi;
+    }
+  } catch (e) {
+    if (kIsWeb) {
+      databaseFactory = databaseFactoryFfiWebNoWebWorker;
+    }
   }
-  databaseFactory = databaseFactoryFfi;
 
   await BDProvider.bd.init_BD();
   Video.getVideoById(1).then(((value) => print(value)));

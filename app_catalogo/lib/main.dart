@@ -1,7 +1,8 @@
 import 'dart:io';
 
 import 'package:app_catalogo/db.dart';
-import 'package:app_catalogo/interface/convvideos.dart';
+import 'package:app_catalogo/interface/cadastrovideo.dart';
+import 'package:app_catalogo/interface/editavideo.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 

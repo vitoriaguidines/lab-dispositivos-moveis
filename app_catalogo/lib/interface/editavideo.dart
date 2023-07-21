@@ -1,4 +1,6 @@
 import 'dart:ui';
+import 'package:app_catalogo/db.dart';
+
 import '../classes_bd/video.dart';
 import 'login.dart';
 import 'package:app_catalogo/main.dart';
@@ -11,10 +13,12 @@ class EditavideoPage extends StatefulWidget {
   const EditavideoPage({required this.video});
 
   @override
-  State<EditavideoPage> createState() => _EditavideoPageState();
+  State<EditavideoPage> createState() => _EditavideoPageState(video: video);
 }
 
 class _EditavideoPageState extends State<EditavideoPage> {
+  final Video video;
+  _EditavideoPageState({required this.video});
   MyApp funcoes = MyApp();
 
   TextEditingController thumbController = TextEditingController();
@@ -66,32 +70,54 @@ class _EditavideoPageState extends State<EditavideoPage> {
           Positioned(
             top: 15,
             right: 30,
-            child: Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                color: Color(0xFF262A2B),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.edit,
-                    color: Colors.white,
-                    size: 20,
+            child: GestureDetector(
+                onTap: () => {
+                      BDProvider.bd.updateVideo(Video(
+                          name: nomeController.text == ""
+                              ? nomeController.text
+                              : video.name,
+                          description: video.description,
+                          type: video.type,
+                          ageRestriction: classificacaoController.text == ""
+                              ? classificacaoController.text
+                              : video.ageRestriction,
+                          durationMinutes: duracaoController.text == ""
+                              ? int.parse(duracaoController.text)
+                              : video.durationMinutes,
+                          thumbnailImageId: thumbController.text == ""
+                              ? thumbController.text
+                              : video.thumbnailImageId,
+                          releaseDate: dataLancamentoController.text == ""
+                              ? dataLancamentoController.text
+                              : video.releaseDate,
+                          genres: video.genres))
+                    },
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Color(0xFF262A2B),
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  Text(
-                    "Editar",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.edit,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                      Text(
+                        "Editar",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
+                )),
           ),
           Padding(
             padding: EdgeInsets.only(top: 20, bottom: 10),

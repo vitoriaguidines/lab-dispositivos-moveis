@@ -54,7 +54,7 @@ class BDProvider {
         .update('user', userUp.toJson(), where: "id=?", whereArgs: [userUp.id]);
   }
 
-  _updateVideo(Video videoUp) async {
+  updateVideo(Video videoUp) async {
     var db = await this.database;
     //Map<String, dynamic> videoData = videoUp.toJson();
 

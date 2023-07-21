@@ -1,9 +1,10 @@
 import 'dart:ui';
-import 'login.dart';
-import 'package:app_catalogo/main.dart';
+import 'package:app_catalogo/interface/menu.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:app_catalogo/interface/login.dart';
+import 'package:app_catalogo/db.dart';
+import 'package:app_catalogo/classes_bd/user.dart';
+import 'package:app_catalogo/main.dart';
 
 class CadastroPage extends StatefulWidget {
   const CadastroPage({Key? key}) : super(key: key);
@@ -14,6 +15,10 @@ class CadastroPage extends StatefulWidget {
 
 class _CadastroPageState extends State<CadastroPage> {
   MyApp funcoes = MyApp();
+
+  final TextEditingController _nomeController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _senhaController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -31,75 +36,155 @@ class _CadastroPageState extends State<CadastroPage> {
               color: Colors.black.withOpacity(0.6),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 15, left: 15),
-            child: funcoes.botaoRedondo(
-                Icon(Icons.arrow_back), Color(0xFF0F62AC), 40, 40, () => {}),
-          ),
-          Column(
-            children: [
-              Align(
-                alignment: FractionalOffset.topCenter,
-                child: Padding(
-                  padding: EdgeInsets.only(top: 85),
-                  child: Image.asset(
-                    "images/logouff.png",
-                    width: 200,
-                    height: 200,
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 35, right: 335),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginPage()));
+                        },
+                        child: Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 10, bottom: 10),
-                child: Container(
-                  child: TextField(
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30,
-                      fontFamily: 'Inter',
+                Align(
+                  alignment: FractionalOffset.topCenter,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 25),
+                    child: Image.asset(
+                      "images/logouff.png",
+                      width: 200,
+                      height: 200,
                     ),
-                    decoration: InputDecoration(
-                      hintText: 'Email',
-                      hintStyle: TextStyle(color: Colors.grey),
-                      contentPadding: EdgeInsets.all(16),
-                      border: InputBorder.none,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 10, bottom: 10),
+                  child: Container(
+                    child: TextField(
+                      controller: _nomeController,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontFamily: 'Inter',
+                      ),
+                      decoration: InputDecoration(
+                        hintText: 'Nome',
+                        hintStyle: TextStyle(color: Colors.grey),
+                        contentPadding: EdgeInsets.all(16),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                    width: 300,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      color: Color(0xFF262A2B),
+                      borderRadius: BorderRadius.circular(15),
                     ),
                   ),
-                  width: 300,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    color: Color(0xFF262A2B),
-                    borderRadius: BorderRadius.circular(15),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10),
+                  child: Container(
+                    child: TextField(
+                      controller: _emailController,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontFamily: 'Inter',
+                      ),
+                      decoration: InputDecoration(
+                        hintText: 'Email',
+                        hintStyle: TextStyle(color: Colors.grey),
+                        contentPadding: EdgeInsets.all(16),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                    width: 300,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      color: Color(0xFF262A2B),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(bottom: 10),
-                child: Container(
-                  width: 300,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    color: Color(0xFF262A2B),
-                    borderRadius: BorderRadius.circular(15),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10),
+                  child: Container(
+                    child: TextField(
+                      controller: _senhaController,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontFamily: 'Inter',
+                      ),
+                      decoration: InputDecoration(
+                        hintText: 'Senha',
+                        hintStyle: TextStyle(color: Colors.grey),
+                        contentPadding: EdgeInsets.all(16),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                    width: 300,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      color: Color(0xFF262A2B),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(bottom: 10),
-                child: Container(
-                  width: 300,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    color: Color(0xFF262A2B),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                ),
-              ),
-              Padding(
+                Padding(
                   padding: EdgeInsets.only(bottom: 10),
                   child: funcoes.criaBotao(
-                      "Cadastrar", Color(0xFF0F62AC), 300, 80, () => {})),
-            ],
+                    "Cadastrar",
+                    Color(0xFF0F62AC),
+                    300,
+                    80,
+                    () {
+                      String nome = _nomeController.text;
+                      String email = _emailController.text;
+                      String senha = _senhaController.text;
+
+                      User newUser =
+                          User(name: nome, email: email, password: senha);
+
+                      // Verifica se o usuário já existe no banco de dados (pode ajustar conforme suas necessidades)
+                      User.getUserById(newUser.id ?? 0).then((user) {
+                        if (user == null) {
+                          // Se o usuário não existe, você pode inserir os dados no banco de dados
+                          // Usando o método save() da classe User
+                          newUser.save().then((_) {
+                            print('Usuário cadastrado com sucesso!');
+                          });
+                        } else {
+                          print('Usuário já existe!');
+                        }
+                      });
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),

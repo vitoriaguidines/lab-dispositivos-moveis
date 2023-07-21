@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:app_catalogo/db.dart';
+import 'package:app_catalogo/interface/cadastrovideo.dart';
+import 'package:app_catalogo/interface/editavideo.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
@@ -70,21 +72,16 @@ class MyApp extends StatelessWidget {
   Widget botaoRedondo(
       Icon icon, Color color, double width, double heigth, onPressed) {
     return ElevatedButton(
-      onPressed: onPressed,
-      child: Icon(
-        Icons.arrow_back,
-        color: Colors.white,
-      ),
-      style: ButtonStyle(
-        shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
+        onPressed: onPressed,
+        child: Container(
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
+              color: Colors.blue, borderRadius: BorderRadius.circular(8)),
+          child: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
           ),
-        ),
-        minimumSize: MaterialStateProperty.all(Size(width, heigth)),
-        fixedSize: MaterialStateProperty.all(Size(width, heigth)),
-        backgroundColor: MaterialStateProperty.all(color),
-      ),
-    );
+        ));
   }
 }

@@ -40,6 +40,8 @@ dependencies:
   path_provider: any
   sqflite_common_ffi: any
   sqflite_common_ffi_web: any
+  shared_preferences: ^2.0.15  
+
 
 dev_dependencies:
   flutter_test:

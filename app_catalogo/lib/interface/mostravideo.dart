@@ -3,8 +3,8 @@ import 'package:app_catalogo/interface/editavideo.dart';
 import 'package:path/path.dart';
 
 import '../classes_bd/video.dart';
-import 'login.dart';
-import 'package:app_catalogo/main.dart';
+
+import '../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';

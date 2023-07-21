@@ -1,13 +1,19 @@
-import 'dart:ui';
-import 'package:app_catalogo/interface/menu.dart';
 import 'package:flutter/material.dart';
-import 'package:app_catalogo/interface/login.dart';
-import 'package:app_catalogo/db.dart';
-import 'package:app_catalogo/classes_bd/user.dart';
+import 'package:flutter/material.dart';
+import 'package:app_catalogo/interface/LoginPage.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
+import 'dart:ui';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:app_catalogo/main.dart';
+import 'package:app_catalogo/helper/DatabaseHelper.dart';
+import 'package:app_catalogo/controller/LoginController.dart';
+
+import '../model/User.dart';
 
 class CadastroPage extends StatefulWidget {
-  const CadastroPage({Key? key}) : super(key: key);
+  const CadastroPage({super.key});
 
   @override
   State<CadastroPage> createState() => _CadastroPageState();
@@ -16,9 +22,27 @@ class CadastroPage extends StatefulWidget {
 class _CadastroPageState extends State<CadastroPage> {
   MyApp funcoes = MyApp();
 
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController _nomeController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _senhaController = TextEditingController();
+
+  LoginController _loginController = LoginController();
+
+  void _cadastrarUsuario() async {
+    if (_formKey.currentState!.validate()) {
+      String username = _nomeController.text;
+      String password = _senhaController.text;
+      User newUser = User(username: username, password: password);
+      int savedUserId = await _loginController.saveUser(newUser);
+
+      if (savedUserId != -1) {
+        print('show');
+      } else {
+        print("erro");
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -155,33 +179,10 @@ class _CadastroPageState extends State<CadastroPage> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(bottom: 10),
-                  child: funcoes.criaBotao(
-                    "Cadastrar",
-                    Color(0xFF0F62AC),
-                    300,
-                    80,
-                    () {
-                      String nome = _nomeController.text;
-                      String email = _emailController.text;
-                      String senha = _senhaController.text;
-
-                      User newUser =
-                          User(name: nome, email: email, password: senha);
-
-                      // Verifica se o usuário já existe no banco de dados (pode ajustar conforme suas necessidades)
-                      User.getUserById(newUser.id ?? 0).then((user) {
-                        if (user == null) {
-                          // Se o usuário não existe, você pode inserir os dados no banco de dados
-                          // Usando o método save() da classe User
-                          newUser.save().then((_) {
-                            print('Usuário cadastrado com sucesso!');
-                          });
-                        } else {
-                          print('Usuário já existe!');
-                        }
-                      });
-                    },
-                  ),
+                  child: funcoes
+                      .criaBotao("Cadastrar", Color(0xFF0F62AC), 300, 80, () {
+                    _cadastrarUsuario();
+                  }),
                 ),
               ],
             ),

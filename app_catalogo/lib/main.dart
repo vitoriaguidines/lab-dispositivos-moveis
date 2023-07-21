@@ -1,40 +1,18 @@
-import 'dart:io';
-
-import 'package:app_catalogo/db.dart';
-import 'package:app_catalogo/interface/mostravideo.dart';
-import 'package:app_catalogo/interface/editavideo.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
-import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
+import 'interface/LoginPage.dart';
 
-import 'package:app_catalogo/interface/cadastro.dart';
-import 'package:app_catalogo/interface/catalogo.dart';
-import 'package:app_catalogo/interface/menu.dart';
-import 'package:flutter/material.dart';
-import 'interface/login.dart';
+final routes = {
+  '/': (BuildContext context) => LoginPage(),
+  '/login': (BuildContext context) => LoginPage(),
+};
 
-import 'classes_bd/user.dart';
-import 'classes_bd/video.dart';
-
-void main() async {
-  //runApp(const MyApp());
-  await WidgetsFlutterBinding.ensureInitialized();
-  try {
-    if (Platform.isWindows || Platform.isLinux) {
-      //Initialize FFI
-      sqfliteFfiInit();
-      databaseFactory = databaseFactoryFfi;
-    }
-  } catch (e) {
-    if (kIsWeb) {
-      databaseFactory = databaseFactoryFfiWebNoWebWorker;
-    }
-  }
-
-  await BDProvider.bd.init_BD();
-  Video.getVideoById(1).then(((value) => print(value)));
-  runApp(const MyApp());
+void main() {
+  runApp(MaterialApp(
+    title: "Login",
+    debugShowCheckedModeBanner: false,
+    theme: new ThemeData(primarySwatch: Colors.teal),
+    routes: routes,
+  ));
 }
 
 class MyApp extends StatelessWidget {

@@ -43,7 +43,7 @@ class _MostraVideoPageState extends State<MostraVideoPage> {
               Color(0xFF0F62AC),
               40,
               40,
-              () => {},
+              () => {Navigator.pop(context)},
             ),
           ),
           Positioned(
@@ -115,7 +115,7 @@ class _MostraVideoPageState extends State<MostraVideoPage> {
                     ),
                     Divider(color: Colors.white),
                     Text(
-                      video.genres[0].name,
+                      video.genres[0].name + ", " + video.genres[1].name,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,

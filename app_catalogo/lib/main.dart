@@ -1,4 +1,11 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
+import 'db.dart';
 import 'interface/LoginPage.dart';
 
 final routes = {
@@ -6,7 +13,21 @@ final routes = {
   '/login': (BuildContext context) => LoginPage(),
 };
 
-void main() {
+void main() async {
+  await WidgetsFlutterBinding.ensureInitialized();
+  try {
+    if (Platform.isWindows || Platform.isLinux) {
+      //Initialize FFI
+      sqfliteFfiInit();
+      databaseFactory = databaseFactoryFfi;
+    }
+  } catch (e) {
+    if (kIsWeb) {
+      databaseFactory = databaseFactoryFfiWebNoWebWorker;
+    }
+  }
+  await BDProvider.bd.init_BD();
+
   runApp(MaterialApp(
     title: "Login",
     debugShowCheckedModeBanner: false,

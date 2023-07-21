@@ -96,13 +96,30 @@ class BDProvider {
     var videoMapList = await getVideoMapList();
     int count = videoMapList.length;
 
-    List<Video> videoList = List<Video>.empty();
+    List<Video> videoList = List<Video>.empty(growable: true);
     for (int i = 0; i < count; i++) {
-      videoList.add(Video.fromMap(videoMapList[i]));
+      print(videoMapList[i]["id"]);
+      videoList.add(await Video.getVideoById(videoMapList[i]["id"]));
     }
-
     return videoList;
   }
+
+
+  static Future<Video> getVideoById(int id) async {
+    final db = await bd.database;
+    var resVideo = await db.query("video", where: "id = ?", whereArgs: [id]);
+    Map<String, dynamic> ret = Map.from(resVideo.first);
+    //Pegamos os items em genre que correspondem ao item atual e adicionamos no
+    //fim da lista
+    var resGenre =
+        await db.query("video_genre", where: "videoid = ?", whereArgs: [id]);
+    List<Genre> genreList = List.empty(growable: true);
+    for (var item in resGenre) {
+      Genre.getGenreById(item["genreid"] as int)
+          .then((value) => genreList.add(value));
+    }
+    ret["genres"] = genreList;
+    return Video.fromMap(ret);
 
   Future<List<Genre>> getGenreList() async {
     var genreMapList = await getGenreMapList();
